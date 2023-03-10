@@ -1,0 +1,8 @@
+  select x.agreementid co_app_id,x.dpd co_app_dpd,y.GUARANTOR_HIRER_ID co_cust_id,y.APPLID main_id ,y.dpd,y.LESSEEID main_cust_id from 
+lea_agreement_dtl_MAR_2022 x,
+(select a.APPLID,a.GUARANTOR_HIRER_ID ,flag,dpd,b.LESSEEID from
+LEA_GUARANTOR_HIRER_DTL a ,
+(select agreementid ,dpd,LESSEEID from lea_agreement_dtl_MAR_2022 where status='A') b
+where a.APPLID=b.agreementid
+and a.flag='C') y 
+where x.LESSEEID=y.GUARANTOR_HIRER_ID
